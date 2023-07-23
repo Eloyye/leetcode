@@ -2,14 +2,13 @@ from typing import List
 import unittest
 
 def maxSubArray(nums: List[int]) -> int:
-    #remember we can take in [-1] and we can have a negative maximum_subarray_total
-    maximum_subarray_total = nums[0]
-    current_subarray_total = 0
-    for num in nums:
-        current_subarray_total += num
-        maximum_subarray_total = max(maximum_subarray_total, current_subarray_total)
-        current_subarray_total = 0 if current_subarray_total < 0 else current_subarray_total
-    return maximum_subarray_total
+    max_subarray_result = nums[0]
+    current_sum = 0
+    for n in nums:
+        current_sum += n
+        max_subarray_result = max(max_subarray_result, current_sum)
+        current_sum = max(0, current_sum)
+    return max_subarray_result
 
 
 class maxSubArrayTest(unittest.TestCase):
