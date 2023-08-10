@@ -2,13 +2,12 @@ from typing import List
 import unittest
 
 def lengthOfLIS(nums: List[int]) -> int:
-    LIS = [1] * len(nums)
-
-    for i in range(len(nums) - 1, -1, -1):
+    dp = [1 for _ in range(len(nums) + 1)]
+    for i in range(len(nums) - 1, -1 , -1):
         for j in range(i + 1, len(nums)):
-            if nums[i] < nums[j]:
-                LIS[i] = max(LIS[i], 1 + LIS[j])
-    return max(LIS)
+            if nums[j] > nums[i]:
+                dp[i] = max(dp[i], 1 + dp[j])
+    return max(dp)
 
 def lengthOfLISubarray(nums: List[int]) -> int:
     max_len = 1
@@ -19,6 +18,7 @@ def lengthOfLISubarray(nums: List[int]) -> int:
         prevValue = n
         max_len = max(max_len, cur_max_len)
     return max_len
+
 
 class lengthOfLISTest(unittest.TestCase):
     def test1(self):

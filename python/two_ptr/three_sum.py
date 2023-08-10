@@ -1,4 +1,7 @@
-def threeSum(nums):
+from typing import List
+
+
+def threeSum(nums : List[int]) -> List[List[int]]:
     """
     :type nums: List[int]
     :rtype: List[List[int]]
