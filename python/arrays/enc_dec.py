@@ -13,10 +13,6 @@ class Solution:
             res += str(len(s)) + '#' + s
         return res
 
-    """
-    @param: str: A string
-    @return: decodes a single string to a list of strings
-    """
     def decode(self, str : str) -> List[str]:
         # write your code here
         # i is the start position of a len + delimiter + string

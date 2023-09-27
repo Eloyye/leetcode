@@ -7,7 +7,7 @@ class TrieNode:
         self.nextLetters = {}
         self.isLastLetterOfWord = False
     def insert(self, char : str):
-        if not self.nextLetters.get(char):
+        if char not in self.nextLetters:
             self.nextLetters[char] = TrieNode(char)
 
     def getIsLastLetterOfWord(self):

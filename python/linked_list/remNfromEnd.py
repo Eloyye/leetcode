@@ -3,22 +3,36 @@ from typing import Optional
 from python.linked_list.utils.ListNode import ListNode
 
 
-def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
-    dummy = ListNode(next=head)
-    left = dummy
-    right = head
+class Solution:
 
-    # bias by n
-    while n > 0 and right:
-        right = right.next
-        n -= 1
+    def removeNthFromEnd2(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        dummy = ListNode(next=head)
+        left = dummy
+        right = head
+        while n > 0 and right:
+            right = right.next
+            n -= 1
+        while right:
+            left = left.next
+            right = right.next
+        left.next = left.next.next
+        return dummy.next
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        dummy = ListNode(next=head)
+        left = dummy
+        right = head
 
-    #keep shifting both pointer
-    while right:
-        left = left.next
-        right = right.next
+        # bias by n
+        while n > 0 and right:
+            right = right.next
+            n -= 1
 
-    #delete node
-    left.next = left.next.next
+        #keep shifting both pointer
+        while right:
+            left = left.next
+            right = right.next
 
-    return dummy.next
+        #delete node
+        left.next = left.next.next
+
+        return dummy.next

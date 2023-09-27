@@ -3,26 +3,17 @@ from typing import List
 
 
 class Solution:
-    def mergeAttempt(self, intervals: List[List[int]]) -> List[List[int]]:
-        res = []
-        for interval in intervals:
-            for placed_intervals in res:
-                isDisjoint = (placed_intervals[1] < interval[0] and placed_intervals[1] < interval[1]) or \
-                                   (placed_intervals[0] > interval[1] and placed_intervals[0] > interval[0])
-                if isDisjoint:
-                    res.append(interval)
-                    break
-                else:
-                    placed_intervals[0] = min(placed_intervals[0], interval[0])
-                    placed_intervals[1] = max(placed_intervals[1], interval[1])
-                    break
-            if not res:
-                res.append(interval)
-        return res
-
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-        intervals.sort(key=lambda interval: interval[0])
-        
+        intervals.sort()
+        res = []
+        for low, high in intervals:
+            if not res or res[-1][1] < low:
+                #disjoint or beginning
+                res.append([low, high])
+            else:
+                #merge
+                res[-1][1] = max(high, res[-1][1])
+        return res
 
 class MergeIntervalsTest(unittest.TestCase):
     def test1(self):

@@ -34,3 +34,15 @@ class Solution:
                     coins = nums[l] * nums[k] * nums[r]
                     dp[l][r] = max(dp[l][r], dp[l][k] + coins + dp[k][r])
         return dp[0][n - 1]
+    def maxCoins2(self, nums : List[int]) -> int:
+        nums = [1] + nums + [1]
+        n = len(nums)
+        max_coins_between = [[0]*n for _ in range(n)]
+        # we don't want to start our bounds in the right padding
+        for left_bound in range(n - 2, -1, -1):
+            for right_bound in range(left_bound + 2, n):
+                for k in range(left_bound + 1, right_bound):
+                    coins = nums[left_bound] * nums[k] * nums[right_bound]
+                    max_coins_between[left_bound][right_bound] = max(max_coins_between[left_bound][right_bound], max_coins_between[left_bound][k] + coins + max_coins_between[k][right_bound])
+        return max_coins_between[0][n - 1]
+
