@@ -1,10 +1,8 @@
 #Design a time-based key-value data structure that can store multiple values for the same key
 # at different time stamps and retrieve the key's value at a certain timestamp.
 class TimeMap:
-
     def __init__(self):
         self.store = {} #hashmap {key: list[val, timestamp]
-
     def set(self, key: str, value: str, timestamp: int) -> None:
         if key not in self.store:
             self.store[key] = []

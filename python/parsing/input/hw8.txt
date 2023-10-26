@@ -1,0 +1,11 @@
+Squirrel ID, Sex,	Acorns
+1,	Male,	42
+2,	Female,	64
+3,	Male,	20
+4,	Female,	34
+5,	Female,	35
+6,	Male,	55
+7,	Female,	40
+8,	Female,	11
+9,	Female,	71
+10,	Male,	39

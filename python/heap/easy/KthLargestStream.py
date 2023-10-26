@@ -6,18 +6,15 @@ import heapq
 class KthLargest:
 
     def __init__(self, k: int, nums: List[int]):
-        self.minHeap, self.k = nums, k
-        heapify(self.minHeap)
-        # We are doing this so that the size of the min heap is K
-        while len(self.minHeap) > k:
-            heapq.heappop(self.minHeap)
-
+        self.min_heap, self.k = nums, k
+        heapq.heapify(self.min_heap)
+        while len(self.min_heap) > k:
+            heapq.heappop(self.min_heap)
     def add(self, val: int) -> int:
-        heapq.heappush(self.minHeap, val)
-        # could be that the heap is of size less than k, then that means we don't want to pop
-        if len(self.minHeap) > self.k:
-            heapq.heappop(self.minHeap)
-        return self.minHeap[0]
+        heapq.heappush(self.min_heap, val)
+        while len(self.min_heap) > self.k:
+            heapq.heappop(self.min_heap)
+        return self.min_heap[0]
 class KthLargestTest(unittest.TestCase):
     def test1(self):
         lg = KthLargest(3, [4, 5, 8, 2])
