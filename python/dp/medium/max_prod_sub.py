@@ -2,14 +2,13 @@ from typing import List
 import unittest
 
 def maxProduct(nums: List[int]) -> int:
-    maxProductResult = nums[0]
-    #start with multiplicative identity
-    _maxProduct = _minProduct = 1
-    for n in nums:
-        _maxProduct, _minProduct = max(n, n * _maxProduct, n * _minProduct), min(n, n*_maxProduct, n*_minProduct)
-        maxProductResult = max(maxProductResult, _maxProduct)
-    return maxProductResult
-
+    max_product_result = nums[0]
+    temp_max = temp_min = 1
+    for num in nums:
+        temp_max = max(num, num * temp_max, num * temp_min)
+        temp_min = min(num, num * temp_max, num * temp_min)
+        max_product_result = max(max_product_result, temp_max)
+    return max_product_result
 
 class MaxProductTest(unittest.TestCase):
     def test1(self):

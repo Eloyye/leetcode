@@ -3,7 +3,7 @@ from typing import Optional
 from python.tree.utils.TreeNode import TreeNode
 
 
-def isValidBST(self, root: Optional[TreeNode]) -> bool:
+def isValidBST(root: Optional[TreeNode]) -> bool:
     def isValidBSTGivenLeft(node, left, right) -> bool:
         if not node:
             return True

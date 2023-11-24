@@ -4,6 +4,36 @@ from typing import List
 
 class Solution:
 
+    def minCostConnectPoints2(self, points: List[List[int]]) -> int:
+        def calculate_distance(pt1, pt2):
+            return abs(pt1[0] - pt2[0]) + abs(pt1[1] - pt2[1])
+        def construct_adj_list(points):
+            N = len(points)
+            res = {i : [] for i in range(N)}
+            for i in range(N):
+                for j in range(i + 1, N):
+                    dist = calculate_distance(points[i], points[j])
+                    res[i].append(dist)
+                    res[j].append(dist)
+            return res
+
+        def calculate_mst(adj_list, N):
+            res = 0
+            visit = set()
+            min_heap = [(0, 0)]
+            while len(visit) < N:
+                cost, current_node = heapq.heappop(min_heap)
+                if current_node in visit:
+                    continue
+                res += cost
+                visit.add(current_node)
+                for neighbor_cost, neighbor_node in adj_list[current_node]:
+                    if neighbor_node not in visit:
+                        heapq.heappush(min_heap, (neighbor_cost, neighbor_node))
+            return res
+
+
+        return calculate_mst(construct_adj_list(points), len(points))
     def minCostConnectPoints(self, points: List[List[int]]) -> int:
         def create_adjancency_list(pts: List[List[int]]) -> dict[int : list[tuple[int, int]]]:
             N = len(pts)

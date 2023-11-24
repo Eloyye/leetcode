@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "ES2022",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "lib": ["es5", "es6", "dom"]
+  },
+  "files": [
+    "python/linked_list/typescript/lru_cache.ts",
+  ]
+}

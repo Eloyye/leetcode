@@ -21,6 +21,14 @@ def majorityElementHashMap(nums):
 # We use the Boyer Moore's algorithm to do this O(n) time AND O(1) space complexity
 # This uses the fact that there EXIST A MAJORITY ELEMENT
 def majorityElement(nums):
+    result = count = 0
+    for num in nums:
+        if count == 0:
+            result = num
+        count += (1 if num == result else -1)
+    return result
+
+def majorityElement(nums):
     """
     :type nums: List[int]
     :rtype: int
