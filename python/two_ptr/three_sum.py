@@ -1,11 +1,27 @@
 from typing import List
 
 
+def threeSum2(nums : List[int]) -> List[List[int]]:
+    nums.sort()
+    result = []
+    for i, num in enumerate(nums):
+        if i == 0 or nums[i] != nums[i - 1]:
+            left, right = i + 1, len(nums) - 1
+            while right > left:
+                left_val = nums[left]
+                right_val = nums[right]
+                total = left_val + num + right_val
+                if total == 0:
+                    result.append([num, left_val, right_val])
+                    left += 1
+                    while right > left and nums[left] == nums[left - 1]:
+                        left += 1
+                elif total < 0:
+                    left += 1
+                else:
+                    right -= 1
+    return result
 def threeSum(nums : List[int]) -> List[List[int]]:
-    """
-    :type nums: List[int]
-    :rtype: List[List[int]]
-    """
     #sort so that you can reduce to 2sum II, which requires sorted array
     nums.sort()
     myList = []
@@ -32,4 +48,7 @@ def threeSum(nums : List[int]) -> List[List[int]]:
                 right_ptr -= 1
     return myList
 
-threeSum([-1,0,1,2,-1,-4])
+if __name__ == '__main__':
+    res = threeSum2([-1,0,1,2,-1,-4])
+    print(res)
+

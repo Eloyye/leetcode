@@ -2,6 +2,19 @@ from typing import Optional
 
 from python.linked_list.utils.ListNode import ListNode
 
+class Solution:
+    def reorder_list(self, head: ListNode):
+        slow, fast = head, head.next
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        second = slow.next
+        prev = slow.next = None
+        while second:
+            prev, second, second.next = second, second.next, prev,
+        first, second = head, prev
+        while second:
+            first, second, first.next, second.next = first.next, second.next, second, first.next
 
 def reorderList(self, head: Optional[ListNode]) -> None:
     """

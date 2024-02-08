@@ -1,12 +1,13 @@
 from typing import List
 
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        max_profit, min_buy = 0, float('inf')
+        for p in prices:
+            min_buy = min(min_buy, p)
+            max_profit = max(max_profit, p - min_buy)
+        return max_profit
 
-def maxProfit(self, prices: List[int]) -> int:
-    max_profit, min_buy = 0, float("infinity")
-    for p in prices:
-        min_buy = min(min_buy, p)
-        max_profit = max(max_profit, p - min_buy)
-    return max_profit
 
 def maxProfit_neetcode(prices: List[int]) -> int:
     l, r = 0, 1

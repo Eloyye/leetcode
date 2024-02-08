@@ -1,6 +1,17 @@
 from typing import List
 import unittest
 
+def lengthOfLIS2(nums: List[int]) -> int:
+    dp = [1 for _ in range(len(nums) + 1)]
+    max_value = dp[0]
+    for i in range(len(nums) -1, -1, -1):
+        for j in range(i + 1, len(nums)):
+            if nums[j] > nums[i]:
+                dp[i] = max(dp[i], 1 + dp[j])
+                max_value = max(dp[i], max_value)
+    return max_value
+
+
 def lengthOfLIS(nums: List[int]) -> int:
     dp = [1 for _ in range(len(nums) + 1)]
     for i in range(len(nums) - 1, -1 , -1):

@@ -1,6 +1,15 @@
 from typing import List
 import unittest
 
+def maxSubArray2(nums: List[int]) -> int:
+    res, cur_sum = nums[0], 0
+    for num in nums:
+        cur_sum += num
+        res = max(res, cur_sum)
+        cur_sum = max(0, cur_sum)
+    return cur_sum
+
+
 def maxSubArray(nums: List[int]) -> int:
     max_subarray_result = nums[0]
     current_sum = 0

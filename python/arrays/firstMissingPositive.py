@@ -2,6 +2,7 @@ from typing import List
 
 
 class Solution:
+
     def firstMissingPositive(self, nums: List[int]) -> int:
         n = len(nums)
         for i, num in enumerate(nums):

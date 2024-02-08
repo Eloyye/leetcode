@@ -1,5 +1,35 @@
 import unittest
 
+class Solution2:
+    def backspace_compare(self, s1 : str, s2: str) -> bool:
+        def evaluate(s : str) -> str:
+            def resolve_backspace(s, i, backspaces):
+                while i >= 0 and s[i] == '#':
+                    backspaces += 1
+                    i -= 1
+                return i, backspaces
+            i = len(s) - 1
+            res = ""
+            backspaces = 0
+            while i >= 0:
+                while i >= 0 and s[i] == '#':
+                    backspaces += 1
+                    i -= 1
+                while backspaces > 0:
+                    if i >= 0 and s[i] == "#":
+                        backspaces += 1
+                    else:
+                        backspaces -= 1
+                    i -= 1
+                if i >= 0 and s[i] != '#' and backspaces == 0:
+                    res = s[i] + res
+                    i -= 1
+            return res
+
+        e1 = evaluate(s1)
+        e2 = evaluate(s2)
+        print(f'e1: {e1}, e2: {e2}')
+        return e1 == e2
 
 class Solution:
     def backspaceCompare(self, s: str, t: str) -> bool:
@@ -31,58 +61,64 @@ class Solution:
 
 class BcTest(unittest.TestCase):
     def test1(self):
-        f = Solution().backspaceCompare
+        f = Solution2().backspace_compare
         s, t = "ab#c", "ad#c"
         res = f(s, t)
         expected = True
         self.assertEqual(expected, res)
     def test2(self):
-        f = Solution().backspaceCompare
+        f = Solution2().backspace_compare
         s, t = "ab##", "c#d#"
         res = f(s, t)
         expected = True
         self.assertEqual(expected, res)
     def test3(self):
-        f = Solution().backspaceCompare
+        f = Solution2().backspace_compare
         s, t = "a#c", "b"
         res = f(s, t)
         expected = False
         self.assertEqual(expected, res)
     def test4(self):
-        f = Solution().backspaceCompare
+        f = Solution2().backspace_compare
         s, t = "bxj##tw", "bxo#j##tw"
         res = f(s, t)
         expected = True
         self.assertEqual(expected, res)
     def test5(self):
-        f = Solution().backspaceCompare
+        f = Solution2().backspace_compare
         s, t = "xywrrmp", "xywrrmu#p"
         res = f(s, t)
         expected = True
         self.assertEqual(expected, res)
     def test6(self):
-        f = Solution().backspaceCompare
+        f = Solution2().backspace_compare
         s, t = "a##c", "#a#c"
         res = f(s, t)
         expected = True
         self.assertEqual(expected, res)
     def test7(self):
-        f = Solution().backspaceCompare
+        f = Solution2().backspace_compare
         s, t = "bbbextm", "bbb#extm"
         res = f(s, t)
         expected = False
         self.assertEqual(expected, res)
     def test8(self):
-        f = Solution().backspaceCompare
+        f = Solution2().backspace_compare
         s, t = "nzp#o#g", "b#nzp#o#g"
         res = f(s, t)
         expected = True
         self.assertEqual(expected, res)
     def test9(self):
-        f = Solution().backspaceCompare
+        f = Solution2().backspace_compare
         s, t = "aaa###a", "aaaa###a"
         res = f(s, t)
         expected = False
+        self.assertEqual(expected, res)
+    def test10(self):
+        f = Solution2().backspace_compare
+        s, t = "e##e#o##oyof##q", "e##e#fq##o##oyof##q"
+        res = f(s, t)
+        expected = True
         self.assertEqual(expected, res)
 
 def backspaceCompare(s, t):

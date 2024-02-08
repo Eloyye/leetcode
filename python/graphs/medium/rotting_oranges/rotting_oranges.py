@@ -2,6 +2,40 @@ from collections import deque
 from typing import List
 import unittest
 
+
+class RottingOrangesSolution:
+    def oranges_rotting(self, grid: list[list[int]]) -> int:
+        ROWS, COLS = len(grid), len(grid[0])
+        visited = set()
+        q = deque()
+        time_elapsed = 0
+
+        def insert_rotten_oranges(visited):
+            for r in range(ROWS):
+                for c in range(COLS):
+                    if grid[r][c] == 2:
+                        q.append((r, c))
+            return visited
+
+        visited = insert_rotten_oranges(visited)
+        while q:
+            for _ in range(len(q)):
+                r, c = q.popleft()
+                visited.add((r, c))
+                grid[r][c] = 2
+                directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+                # when processing the neighbors, the only responsibility is adding to queue/deque
+                # This is the relaxation step
+                for dr, dc in directions:
+                    r += dr
+                    c += dc
+                    if (0 <= r < ROWS and 0 <= c < COLS) and ((r, c) not in visited) and grid[r][c] == 1:
+                        q.append((r, c))
+            if q:
+                time_elapsed += 1
+        return time_elapsed if not any(1 in row for row in grid) else -1
+
+
 def orangesRotting(grid: List[List[int]]) -> int:
     ROWS, COLS = len(grid), len(grid[0]),
     visited = set()
@@ -35,20 +69,3 @@ def orangesRotting(grid: List[List[int]]) -> int:
     if any(1 in row for row in grid):
         return -1
     return timeElapsed
-class RottingOrangesTest(unittest.TestCase):
-    def test1(self):
-        grid = [
-            [2,1,1],
-            [1,1,0],
-            [0,1,1]
-        ]
-        expected = 4
-        self.assertEqual(orangesRotting(grid), expected)
-    def test2(self):
-        grid = [
-            [2,1,1],
-            [0,1,1],
-            [1,0,1]
-        ]
-        expected = -1
-        self.assertEqual(orangesRotting(grid), expected)

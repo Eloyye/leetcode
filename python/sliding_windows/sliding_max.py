@@ -44,7 +44,26 @@ def maxSlidingWindow2(nums, k):
         r += 1
     return out
 
-nums = [1,3,-1,-3,5,3,6,7]
-k = 3
-res = maxSlidingWindow(nums, k)
-print(f"result: {res}")
+class Solution:
+    def max_sliding_windows(self, nums: list[int], k: int):
+        queue = collections.deque()
+        max_window_output = []
+        left = right = 0
+        while right < len(nums):
+            while queue and nums[queue[-1]] < nums[right]:
+                queue.pop()
+            queue.append(right)
+            if left > queue[0]:
+                queue.popleft()
+            if (right + 1) >= k:
+                max_window_output.append(queue[0])
+                left += 1
+            right += 1
+        return max_window_output
+
+
+if __name__ == '__main__':
+    nums = [1,3,-1,-3,5,3,6,7]
+    k = 3
+    res = maxSlidingWindow(nums, k)
+    print(f"result: {res}")

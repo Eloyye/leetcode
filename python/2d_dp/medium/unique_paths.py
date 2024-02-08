@@ -10,12 +10,11 @@ class Solution:
                 dp[row][col] = dp[row + 1][col] + dp[row][col + 1]
         return dp[0][0]
     def uniquePathsLinear(self, m: int, n: int) -> int:
-        prev_row = [1]*n
+        prev_row = [1] * n
         for _ in range(m - 1):
-            new_row = [1]*n
-            #borders are all 1,
-            for j in range(n - 2, -1, -1):
-                new_row[j] = new_row[j + 1] + prev_row[j]
+            new_row = [1] * n
+            for j in range(n - 2, -1 , -1):
+                prev_row[j] = new_row[j + 1] + prev_row[j]
             prev_row = new_row
         return prev_row[0]
 class UniquePathsTest(unittest.TestCase):
